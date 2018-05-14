@@ -29,7 +29,7 @@ public class NewEditorRoute implements Route {
 
             // Everything went well, return success
             response.status(200);
-            return Message.generateJson(generateUniqueId());
+            return Message.generateJson(id);
 
         } catch (IOException | TimeoutException e) {
             e.printStackTrace();

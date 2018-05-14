@@ -11,7 +11,19 @@ public class Message {
         this.message = message;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public static String generateJson(String message) {
         return gson.toJson(new Message(message));
+    }
+
+    public static Message fromJson(String body) {
+        return gson.fromJson(body, Message.class);
     }
 }

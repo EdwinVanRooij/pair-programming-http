@@ -13,9 +13,6 @@ public class MessageBus {
 
     }
 
-    public void createQueue() {
-
-    }
 
     public void produceMessage(String json) {
         try {
@@ -71,5 +68,24 @@ public class MessageBus {
 
         channel.close();
         connection.close();
+    }
+
+    public boolean queueExists(String queueName) {
+        try {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.setHost("localhost");
+            Connection connection = factory.newConnection();
+            Channel channel = connection.createChannel();
+
+            AMQP.Queue.DeclareOk result = channel.queueDeclarePassive(queueName);
+            System.out.println(String.format("Result of queue exists: %s", result));
+            channel.close();
+            connection.close();
+        } catch (IOException | TimeoutException e) {
+            // Queue does not exist if we get here
+            return false;
+        }
+        // Got past the check, the queue exists
+        return true;
     }
 }
