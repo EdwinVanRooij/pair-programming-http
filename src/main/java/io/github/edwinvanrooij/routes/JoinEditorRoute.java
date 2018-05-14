@@ -20,28 +20,18 @@ public class JoinEditorRoute implements Route {
 
     @Override
     public Object handle(Request request, Response response) {
-        // Retrieve the ID
-        Message m = Message.fromJson(request.body());
-        String id = m.getMessage();
+        // Retrieve the code
+        String code = request.queryParams("code");
 
         // Check whether or not the queue exists
-        if (!bus.queueExists(id)) {
+        if (!bus.queueExists(code)) {
             // Queue does not exist
             response.status(400);
-            return Message.generateJson(String.format("Queue with ID '%s' does not exist. Please check again.", id));
+            return Message.generateJson(String.format("Queue with code '%s' does not exist. Please check again.", code));
         }
 
         // Queue exists, return success
         response.status(200);
-        return Message.generateJson(generateUniqueId());
-    }
-
-
-    /**
-     * Securely generates a random ID.
-     * https://stackoverflow.com/questions/24876188/how-big-is-the-chance-to-get-a-java-uuid-randomuuid-collision
-     */
-    private static String generateUniqueId() {
-        return String.valueOf(UUID.randomUUID());
+        return Message.generateJson("Success!");
     }
 }

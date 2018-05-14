@@ -5,9 +5,7 @@ import io.github.edwinvanrooij.routes.JoinEditorRoute;
 import io.github.edwinvanrooij.routes.NewEditorRoute;
 import spark.Filter;
 
-import static spark.Spark.after;
-import static spark.Spark.get;
-import static spark.Spark.put;
+import static spark.Spark.*;
 
 public class App {
 
@@ -16,16 +14,20 @@ public class App {
     public static void main(String[] args) {
         bus = new MessageBus();
 
+        enableCORS();
+
         // Respond to new editor request
         get("/newEditor", new NewEditorRoute(bus));
 
         // Respond to join editor request
-        put("/joinEditor", new JoinEditorRoute(bus));
+        get("/joinEditor", new JoinEditorRoute(bus));
+    }
 
-        after((Filter) (request, response) -> {
+    private static void enableCORS() {
+        before((Filter) (request, response) -> {
             response.header("Access-Control-Allow-Origin", "*");
-            response.header("Access-Control-Allow-Methods", "GET");
-            response.header("Access-Control-Allow-Methods", "PUT");
+            response.header("Access-Control-Request-Method", "*");
+            response.header("Access-Control-Allow-Headers", "*");
         });
     }
 }
