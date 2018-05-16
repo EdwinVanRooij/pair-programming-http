@@ -15,4 +15,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'dpi-pair-programming-http'
+rootProject.name = 'pair-programming-http'

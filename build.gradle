@@ -14,7 +14,7 @@ apply plugin: 'application'
 
 jar {
 
-    archiveName = "dpi-pair-programming-http.jar"
+    archiveName = "pair-programming-http.jar"
 
     from {
         configurations.runtime.collect {
