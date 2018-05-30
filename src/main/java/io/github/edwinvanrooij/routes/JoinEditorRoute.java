@@ -24,7 +24,7 @@ public class JoinEditorRoute implements Route {
         String code = request.queryParams("code");
 
         // Check whether or not the queue exists
-        if (!bus.queueExists(code)) {
+        if (!bus.exchangeExists(code)) {
             // Queue does not exist
             response.status(400);
             return Message.generateJson(String.format("Queue with code '%s' does not exist. Please check again.", code));

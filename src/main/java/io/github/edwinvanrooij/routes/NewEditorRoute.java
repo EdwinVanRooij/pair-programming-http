@@ -25,7 +25,7 @@ public class NewEditorRoute implements Route {
             String id = generateUniqueId();
 
             // Create new Queue based on this ID
-            bus.createNewQueue(id);
+            bus.createNewExchange(id);
 
             // Everything went well, return success
             response.status(200);
