@@ -1,6 +1,7 @@
 package io.github.edwinvanrooij.bus;
 
 import com.rabbitmq.client.*;
+import io.github.edwinvanrooij.Const;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -13,10 +14,10 @@ public class MessageBus {
 
     public void createNewExchange(String exchangeName) throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("145.93.62.41");
+        factory.setHost(Const.IP);
 
-        factory.setUsername("guest");
-        factory.setPassword("guest");
+//        factory.setUsername("guest");
+//        factory.setPassword("guest");
 
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
@@ -35,7 +36,7 @@ public class MessageBus {
     public boolean exchangeExists(String exchangeName) {
         try {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.setHost("145.93.62.41");
+            factory.setHost(Const.IP);
             Connection connection = factory.newConnection();
             Channel channel = connection.createChannel();
 

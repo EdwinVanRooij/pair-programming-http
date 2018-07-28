@@ -4,6 +4,9 @@ import io.github.edwinvanrooij.bus.MessageBus;
 import io.github.edwinvanrooij.routes.JoinEditorRoute;
 import io.github.edwinvanrooij.routes.NewEditorRoute;
 import spark.Filter;
+import spark.Request;
+import spark.Response;
+import spark.Route;
 
 import static spark.Spark.*;
 
